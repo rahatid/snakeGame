@@ -139,7 +139,6 @@ def game_over():
     canvas.create_window(canvas.winfo_width() / 2, canvas.winfo_height() / 2 + 80, window=restart_button)
 
 
-
 window = Tk()
 window.title("Snake game")
 window.resizable(False, False)
