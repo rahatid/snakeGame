@@ -1,14 +1,16 @@
 from tkinter import *
 import random
 
-GAME_WIDTH = 700
-GAME_HEIGHT = 700
+GAME_WIDTH = 900
+GAME_HEIGHT = 500
 SPEED = 80
-SPACE_SIZE: int = 50
+SPACE_SIZE: int = 30
 BODY_PARTS = 3
 SNAKE_COLOR = "#00FF00"
 FOOD_COLOR = 'yellow'
 BACKGROUND_COLOR = "#000000"
+high_score = 0
+
 
 class Snake:
     def __init__(self):
@@ -118,6 +120,24 @@ def game_over():
                        font=('consolas', 100), text="GAME OVER", fill="red", tag="gameover")
     restart_button = Button(window, text="Restart Game", command=restart_game)
     canvas.create_window(canvas.winfo_width() / 2, canvas.winfo_height() / 2 + 30, window=restart_button)
+
+def game_over():
+    global high_score
+
+    if score > high_score:
+        high_score = score
+
+    canvas.delete(ALL)
+    canvas.create_text(canvas.winfo_width()/2, canvas.winfo_height()/2 - 60,
+                       font=('consolas', 70), text="GAME OVER", fill="red", tag="gameover")
+    canvas.create_text(canvas.winfo_width()/2, canvas.winfo_height()/2,
+                       font=('consolas', 40), text=f"Score: {score}", fill="white", tag="score")
+    canvas.create_text(canvas.winfo_width()/2, canvas.winfo_height()/2 + 40,
+                       font=('consolas', 40), text=f"High Score: {high_score}", fill="green", tag="high_score")
+
+    restart_button = Button(window, text="Restart Game", command=restart_game)
+    canvas.create_window(canvas.winfo_width() / 2, canvas.winfo_height() / 2 + 80, window=restart_button)
+
 
 
 window = Tk()
